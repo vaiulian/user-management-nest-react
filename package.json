@@ -1,0 +1,27 @@
+{
+  "name": "user-management-nest-react",
+  "version": "1.0.0",
+  "description": "A functional user management system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "cd server && npm i && cd ../client && npm i"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaiulian/user-management-nest-react.git"
+  },
+  "keywords": [
+    "nodejs",
+    "nestjs",
+    "typeorm",
+    "react",
+    "redux"
+  ],
+  "author": "vasileaiulian@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vaiulian/user-management-nest-react/issues"
+  },
+  "homepage": "https://github.com/vaiulian/user-management-nest-react#readme"
+}
