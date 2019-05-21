@@ -1,19 +1,21 @@
-version: "3"
+version: "2"
 
 services:
   server:
-    build: .
+    build: ./server
     ports:
       - 3000:3000
     working_dir: /code
     volumes:
       - ./server:/code
+      - /code/node_modules
     command: npm run start:dev
   client:
-    build: .
+    build: ./client
     ports:
       - 3001:3000
     working_dir: /code
     volumes:
       - ./client:/code
+      - /code/node_modules
     command: npm run start
