@@ -10,17 +10,19 @@ export class UsersController {
 
     @Get()
     index(): Promise<User[]> {
+      this.logger.log('Getting all users');
       return this.usersService.findAll();
     }
 
     @Post('')
     async add(@Body() userData: User): Promise<any> {
+      this.logger.log('Adding new user: '+ JSON.stringify(userData));
       return this.usersService.addUser(userData);
     }
 
     @Get(':id')
     async get(@Param('id') id: number): Promise<any> {
-        this.logger.log('Get user with id ' + id);
+        this.logger.log('Getting user with id ' + id);
         return this.usersService.findOne(id);
     }
 
