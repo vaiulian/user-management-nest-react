@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import Users from './components/users'
+import User from './components/user'
+import Home from './components/home'
+import Login from './components/login'
+import Register from './components/register'
+import FourOFours from './components/404'
 
 class App extends Component {
   constructor(props) {
@@ -14,16 +21,20 @@ class App extends Component {
   }
 
   render() {
-    return (<div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
+    return (
+    <div className="App">
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route exact path="/users" component={Users} />
+            <Route path="/users/:id" component={User} />
+            <Route component={FourOFours} />
+          </Switch>
+        </div>
+      </Router>
     </div>);
   }
 
