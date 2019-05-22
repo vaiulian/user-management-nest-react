@@ -16,11 +16,11 @@ import config from '../utility/passportConfig';
         secretOrPrivateKey: config.JWT_SECRET,
         signOptions: {
           expiresIn: config.EXPIRES_IN,
-        }
+        },
     }),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     ],
     providers: [UsersService, AuthService, JwtStrategy],
-    controllers: [AuthController]
+    controllers: [AuthController],
 })
 export class AuthModule { }
