@@ -1,22 +1,25 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, ClassSerializerInterceptor } from '@nestjs/common';
 import { User } from './users.entity';
 import { UsersService } from './users.service';
-import { Logger } from '@nestjs/common';
+import { Logger, UseInterceptors } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
+@UseInterceptors(ClassSerializerInterceptor)
+@UseGuards(AuthGuard())
 @Controller('users')
 export class UsersController {
     constructor(private usersService: UsersService) {}
     private readonly logger = new Logger(UsersController.name);
 
     @Get()
-    index(): Promise<User[]> {
+    index(): Promise<User|User[]> {
       this.logger.log('Getting all users');
       return this.usersService.findAll();
     }
 
     @Post('')
     async add(@Body() userData: User): Promise<any> {
-      this.logger.log('Adding new user: '+ JSON.stringify(userData));
+      this.logger.log('Adding new user: ' + JSON.stringify(userData));
       return this.usersService.addUser(userData);
     }
 
