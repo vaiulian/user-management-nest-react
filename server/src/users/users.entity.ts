@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, BeforeInsert, PrimaryGeneratedColumn } from 'typeorm';
+import * as passwordManager from '../utility/passwordManager';
 
 @Entity()
 export class User {
@@ -14,6 +15,10 @@ export class User {
     @Column()
     lastName: string;
 
+    @BeforeInsert()
+    hashPassword() {
+        this.password = passwordManager.generateHash(this.password);
+    }
     @Column()
     password: string;
 }
