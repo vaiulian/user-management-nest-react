@@ -9,6 +9,7 @@ import User from './pages/user'
 import Login from './pages/login'
 import Register from './pages/register'
 import FourOFours from './pages/404'
+import AddUserPage from './pages/add'
 
 import { alertActions } from './state/actions/alertActions';
 
@@ -40,20 +41,21 @@ class App extends Component {
       <div className="App">
         <div className="container">
           <div className="col-sm-12">
-            {alert.message &&
-              <div className={`alert ${alert.type}`}>{alert.message}</div>
-            }
             <Router history={history} forceRefresh>
-              <div>
+              <div style={{ overflow: 'hidden' }}>
                 <Switch>
                   <Route path="/login" component={Login} />
                   <Route path="/register" component={Register} />
                   <ProtectComponent exact path="/" component={Users} />
+                  <ProtectComponent exact path="/users/new" component={AddUserPage} />
                   <ProtectComponent path="/users/:id" component={User} />
                   <Route component={FourOFours} />
                 </Switch>
               </div>
             </Router>
+            {alert.message &&
+              <div className={`alert ${alert.type}`}>{alert.message}</div>
+            }
           </div>
         </div>
       </div>
