@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -9,12 +10,23 @@ import Login from './pages/login'
 import Register from './pages/register'
 import FourOFours from './pages/404'
 
+import { alertActions } from './state/actions/alertActions';
+
 
 import './App.css';
 
 import { ProtectComponent } from './components/ProtectComponent';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    const { dispatch } = this.props;
+    history.listen((location, action) => {
+        dispatch(alertActions.clear());
+    });
+}
 
   componentDidMount() {
     window.fetch('/link')

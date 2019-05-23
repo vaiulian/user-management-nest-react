@@ -22,6 +22,9 @@ class RegisterPage extends React.Component {
             submitted: false
         };
 
+        // reset login status
+        this.props.dispatch(userAuthActions.logout());
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
