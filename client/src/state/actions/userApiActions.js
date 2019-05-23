@@ -5,7 +5,8 @@ import { userService } from '../services/users.service';
 import { alertActions } from './alertActions';
 
 export const userApiActions = {
-    getAllUsers
+    getAllUsers,
+    deleteUser
 };
 
 function getAllUsers() {
@@ -28,4 +29,24 @@ function getAllUsers() {
     function request() { return { type: userConstants.GETALL_REQUEST } }
     function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
     function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
+}
+
+function deleteUser(id) {
+    return dispatch => {
+
+
+        userService.deleteUser(id)
+            .then(
+                 () => { 
+                    dispatch(success(id));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            );
+    };
+
+    function success(userId) { return { type: userConstants.DELETE_SUCCESS, userId } }
+    function failure(error) { return { type: userConstants.DELETE_FAILURE, error } }
 }

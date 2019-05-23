@@ -6,7 +6,8 @@ export const userService = {
     register,
     login,
     logout,
-    getAll
+    getAll,
+    deleteUser
 };
 
 function register(userName, firstName, lastName, password) {
@@ -56,6 +57,15 @@ function getAll() {
     };
 
     return fetch(`/users`, requestOptions).then(handleResponse);
+}
+
+function deleteUser(id) {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: authHeader()
+    };
+
+    return fetch(`/users/${id}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 /* eslint-disable import/prefer-default-export */
 import { userConstants } from '../constants/user.constants';
 
@@ -20,6 +21,17 @@ export default (state = initialState, action) => {
     return Object.assign({}, state, {
         isRequesting: true
     });
+
+    case userConstants.DELETE_SUCCESS:
+    const newUsers = state.users.filter(val => val.id !== action.userId );
+
+    return Object.assign({}, state, {
+        isRequesting: false,
+        users: newUsers
+    });
+
+    case userConstants.DELETE_FAILURE:
+    return state
     default:
       return state
   }
