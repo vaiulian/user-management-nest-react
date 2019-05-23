@@ -7,7 +7,9 @@ export const userService = {
     login,
     logout,
     getAll,
-    deleteUser
+    deleteUser,
+    getOne,
+    updateOne
 };
 
 function register(userName, firstName, lastName, password) {
@@ -55,6 +57,25 @@ function getAll() {
     };
 
     return fetch(`/users`, requestOptions).then(handleResponse);
+}
+
+function getOne(id) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`/users/${id}`, requestOptions).then(handleResponse);
+}
+
+function updateOne(user) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: authHeader(),
+        body: JSON.stringify(user)
+    };
+
+    return fetch(`/users/${user.id}`, requestOptions).then(handleResponse);
 }
 
 function deleteUser(id) {
