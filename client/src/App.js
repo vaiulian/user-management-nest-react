@@ -17,6 +17,7 @@ import { alertActions } from './state/actions/alertActions';
 import './App.css';
 
 import { ProtectComponent } from './components/ProtectComponent';
+import Header from './components/header';
 
 class App extends Component {
 
@@ -29,12 +30,6 @@ class App extends Component {
     });
 }
 
-  componentDidMount() {
-    window.fetch('/link')
-      .then(response => response.json())
-      .then(data => console.log(data));
-  }
-
   render() {
     const { alert } = this.props;
     return (
@@ -42,6 +37,7 @@ class App extends Component {
         <div className="container">
           <div className="col-sm-12">
             <Router history={history} forceRefresh>
+              <Header />
               <div style={{ overflow: 'hidden' }}>
                 <Switch>
                   <Route path="/login" component={Login} />
