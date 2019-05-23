@@ -10,10 +10,9 @@ import Register from './pages/register'
 import FourOFours from './pages/404'
 import './App.css';
 
+import { ProtectComponent } from './components/ProtectComponent';
+
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     window.fetch('/link')
@@ -27,11 +26,11 @@ class App extends Component {
         <Router>
           <div>
             <Switch>
-              <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-              <Route exact path="/users" component={Users} />
-              <Route path="/users/:id" component={User} />
+              <ProtectComponent exact path="/" component={Home} />
+              <ProtectComponent exact path="/users" component={Users} />
+              <ProtectComponent path="/users/:id" component={User} />
               <Route component={FourOFours} />
             </Switch>
           </div>
