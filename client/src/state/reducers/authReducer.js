@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import { userConstants } from '../constants/user.constants';
 
-const user = JSON.parse(localStorage.getItem('jwt-data'));
-const initialState = user ? { loggedIn: true, user } : { loggedIn: false };
+const userdata = JSON.parse(localStorage.getItem('jwt-data'));
+const initialState = userdata ? { loggedIn: true, userdata } : { loggedIn: false };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -15,12 +15,12 @@ export default (state = initialState, action) => {
     case userConstants.LOGIN_REQUEST:
       return {
         loggingIn: true,
-        user: action.user
+        userdata: action.user
       };
     case userConstants.LOGIN_SUCCESS:
       return {
         loggedIn: true,
-        user: action.user
+        userdata: action.user
       };
     case userConstants.LOGIN_FAILURE:
       return {};
