@@ -7,7 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import { alertActions } from '../../state/actions/alertActions';
 import { userAuthActions } from '../../state/actions/authActions';
 
 class RegisterPage extends React.Component {
@@ -40,9 +40,16 @@ class RegisterPage extends React.Component {
         this.setState({ submitted: true });
         const { userName, firstName, lastName, password } = this.state;
         const { dispatch } = this.props;
-        if (userName && password) {
-            dispatch(userAuthActions.register(userName, firstName, lastName,password));
-        }
+
+        if(userName.length >= 1 && firstName.length >= 1 && lastName.length >= 1 ) {
+          if (password.length >= 5) {
+              dispatch(userAuthActions.register(userName, firstName, lastName,password));
+          } else {
+              dispatch(alertActions.error("Password must be at least 5 char"));
+          }
+      } else {
+            dispatch(alertActions.error("Complete all fields"));
+      }
     }
 
     render() {

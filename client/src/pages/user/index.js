@@ -42,7 +42,7 @@ class UserPage extends React.Component {
       const userToUpdate = Object.assign({}, user);
       userToUpdate.password = password;
 
-      if (password.length > 5) {
+      if (password.length >= 5) {
           dispatch(userApiActions.updateUser(userToUpdate));
       } else {
           dispatch(alertActions.error("Password must be at least 5 char"));
