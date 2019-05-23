@@ -5,7 +5,6 @@ import { Route, Router, Switch } from 'react-router-dom'
 import { history } from './utility/history';
 import Users from './pages/users'
 import User from './pages/user'
-import Home from './pages/home'
 import Login from './pages/login'
 import Register from './pages/register'
 import FourOFours from './pages/404'
@@ -37,8 +36,7 @@ class App extends Component {
                 <Switch>
                   <Route path="/login" component={Login} />
                   <Route path="/register" component={Register} />
-                  <ProtectComponent exact path="/" component={Home} />
-                  <ProtectComponent exact path="/users" component={Users} />
+                  <ProtectComponent exact path="/" component={Users} />
                   <ProtectComponent path="/users/:id" component={User} />
                   <Route component={FourOFours} />
                 </Switch>
