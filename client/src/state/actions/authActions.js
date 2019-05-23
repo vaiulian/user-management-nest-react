@@ -6,7 +6,7 @@ import { alertActions } from './alertActions';
 
 export const history = createBrowserHistory();
 
-export const userActions = {
+export const userAuthActions = {
     login,
     logout
 };
