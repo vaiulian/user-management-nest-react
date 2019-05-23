@@ -25,7 +25,12 @@ export class UsersService {
         const userData: User = await this.userRepository.findOne({
             where: { userName },
         });
-        return this.throwErrorOrReturn(userData);
+        const exception = new HttpException({
+            status: HttpStatus.NOT_FOUND,
+            message: 'Username was not found...',
+          }, HttpStatus.NOT_FOUND);
+
+        return this.throwErrorOrReturn(userData, exception);
     }
 
     async addUser(user: User): Promise<User> {
@@ -36,7 +41,7 @@ export class UsersService {
         } catch (e) {
             throw new HttpException({
                 status: HttpStatus.FORBIDDEN,
-                error: e.message,
+                message: e.message,
               }, HttpStatus.FORBIDDEN);
         }
         return this.throwErrorOrReturn(userData);
@@ -55,9 +60,10 @@ export class UsersService {
         return await this.userRepository.delete(id);
     }
 
-    throwErrorOrReturn = (data: any) => {
+    throwErrorOrReturn = (data: any, exception: HttpException = null) => {
+        const toThrow = exception || new NotFoundException();
         if (!data) {
-            throw new NotFoundException();
+            throw toThrow;
         }
         return data;
     }
