@@ -19,7 +19,7 @@ applyMiddleware(...middleware),
 ...enhancers
 )
 
-export default function setupStore(initialState={simpleReducer: {ceva: 123}}) {
+export default function setupStore(initialState={}) {
  return createStore(
    rootReducer,
    initialState,
