@@ -54,7 +54,7 @@ class App extends Component {
               </div>
             </Router>
             {alert.message &&
-              <div className={`alert ${alert.type}`}>{alert.message}</div>
+              <div style={{'marginTop': '15px'}} className={`alert ${alert.type}`}>{alert.message}</div>
             }
           </div>
         </div>
