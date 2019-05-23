@@ -7,6 +7,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import UserRow from './userRow';
 
 import { userApiActions } from '../../state/actions/userApiActions';
@@ -41,7 +42,7 @@ class UsersPage extends React.Component {
                 ))}
               </tbody>
             </table>
-            
+            <Link to='/users/new' className="btn btn-primary">Add User</Link>
           </div>
         );
     }
