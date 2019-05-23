@@ -9,50 +9,44 @@ export const userService = {
     getAll
 };
 
-function register(username, password) {
+function register(userName, firstName, lastName, password) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ userName, firstName, lastName, password })
     };
 
-    return fetch(`/register`, requestOptions)
+    return fetch(`/auth/register`, requestOptions)
         .then(handleResponse)
         .then(user => {
-            // login successful if there's a jwt token in the response
-            if (user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-            }
-
             return user;
         });
 }
 
-function login(username, password) {
+function login(userName, password) {
     const requestOptions = {
         method: 'POST',
         // headers: { 'Content-Type': 'application/json' },
         headers: authHeader(),
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ userName, password })
     };
 
-    return fetch(`/login`, requestOptions)
+    return fetch(`/auth/login`, requestOptions)
         .then(handleResponse)
         .then(data => {
             // login successful if there's a jwt token in the response
             if (data.access_token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(data));
+                localStorage.setItem('jwt-data', JSON.stringify(data));
             }
 
             return data;
-        });
+        })
 }
 
 function logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
+    localStorage.removeItem('jwt-data');
 }
 
 function getAll() {
