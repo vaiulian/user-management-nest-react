@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
     });
 
     case userConstants.DELETE_FAILURE:
-    return state
+      return state
     default:
       return state
   }

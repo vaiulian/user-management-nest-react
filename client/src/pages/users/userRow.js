@@ -1,24 +1,12 @@
-
-/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable react/prefer-stateless-function */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { userApiActions } from '../../state/actions/userApiActions';
 
 class UserRow extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            // username: '',
-            // password: '',
-            // submitted: false
-        };
-        // this.handleSubmit = this.handleSubmit.bind(this);
-    }
 
     render() {
 

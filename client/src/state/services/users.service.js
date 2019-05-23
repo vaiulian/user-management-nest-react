@@ -27,7 +27,6 @@ function register(userName, firstName, lastName, password) {
 function login(userName, password) {
     const requestOptions = {
         method: 'POST',
-        // headers: { 'Content-Type': 'application/json' },
         headers: authHeader(),
         body: JSON.stringify({ userName, password })
     };
@@ -46,7 +45,6 @@ function login(userName, password) {
 }
 
 function logout() {
-    // remove user from local storage to log user out
     localStorage.removeItem('jwt-data');
 }
 
