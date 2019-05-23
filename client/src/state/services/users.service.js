@@ -9,7 +9,8 @@ export const userService = {
     getAll,
     deleteUser,
     getOne,
-    updateOne
+    updateOne,
+    addOne
 };
 
 function register(userName, firstName, lastName, password) {
@@ -85,6 +86,16 @@ function deleteUser(id) {
     };
 
     return fetch(`/users/${id}`, requestOptions).then(handleResponse);
+}
+
+function addOne(user) {
+    const requestOptions = {
+        method: 'POST',
+        headers: authHeader(),
+        body: JSON.stringify(user)
+    };
+
+    return fetch(`/users`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

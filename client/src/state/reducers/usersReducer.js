@@ -31,7 +31,6 @@ export default (state = initialState, action) => {
     case userConstants.DELETE_SUCCESS:
     const newUsers = state.users.filter(val => val.id !== action.userId );
     return Object.assign({}, state, {
-        isRequesting: false,
         users: newUsers
     });
     case userConstants.DELETE_FAILURE:
@@ -39,10 +38,14 @@ export default (state = initialState, action) => {
 
     case userConstants.GETONE_SUCCESS:
     return Object.assign({}, state, {
-        isRequesting: false,
         user: action.user
     });
     case userConstants.GETONE_FAILURE:
+      return state
+
+    case userConstants.ADDONE_SUCCESS:
+      return state
+    case userConstants.ADDONE_FAILURE:
       return state
 
     default:

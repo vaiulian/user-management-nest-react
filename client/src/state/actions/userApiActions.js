@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-use-before-define */
 import { userConstants } from '../constants/user.constants';
@@ -9,7 +10,8 @@ export const userApiActions = {
     getAllUsers,
     deleteUser,
     getUser,
-    updateUser
+    updateUser,
+    addUser
 };
 
 function getAllUsers() {
@@ -36,7 +38,6 @@ function getAllUsers() {
 
 function deleteUser(id) {
     return dispatch => {
-
 
         userService.deleteUser(id)
             .then(
@@ -92,4 +93,24 @@ function updateUser(user) {
 
     function success() { return { type: userConstants.UPDATE_SUCCESS } }
     function failure(error) { return { type: userConstants.UPDATE_FAILURE, error } }
+}
+
+function addUser(user) {
+    return dispatch => {
+
+        userService.addOne(user)
+            .then(
+                 (addedUser) => { 
+                    dispatch(success(addedUser));
+                    history.push(`/users/${addedUser.id}`);
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            );
+    };
+
+    function success(user) { return { type: userConstants.ADDONE_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.ADDONE_FAILURE, error } }
 }
